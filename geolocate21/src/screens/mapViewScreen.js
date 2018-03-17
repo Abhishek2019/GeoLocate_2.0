@@ -34,7 +34,10 @@ class mapViewScreen extends React.Component{
             latitude : 37,
             longitude : -122,
         },
-
+        longPressMarkerCoordinates :{
+            latitude: 0,
+            longitude: 0,
+        },
         speed : 0,
 
     };
@@ -95,8 +98,22 @@ class mapViewScreen extends React.Component{
     };
 
 
+    onMapLongPress(e){
+
+        const longPress = {
+
+            latitude : e.nativeEvent.coordinate.latitude,
+            longitude : e.nativeEvent.coordinate.longitude,
+        };
+
+        this.setState({longPressMarkerCoordinates : longPress });
+
+    }
+
+
     componentWillMount(){
 
+        console.disableYellowBox = true;
         firebase.initializeApp(firebaseConfig);
         Location.setApiKey(GOOGLE_API_KEY);
         this.getLoc();
@@ -116,18 +133,42 @@ class mapViewScreen extends React.Component{
                 <MapView
 
                     style={{ flex: 1 }}
-                    // showsUserLocation
+                    //showsUserLocation
                     zoomEnabled
                     region={this.state.initialPosition}
+
+                    onLongPress={this.onMapLongPress.bind(this)}
+
                 >
 
                     <MapView.Marker
                         coordinate={this.state.trackMarkerPosition}
                         title={"Abhishek"}
-                        description={"You can't escape from me HaHaHa.... I am a tracer "}
+                        description={"You can't escape from me HaHaHa.... I am a tracker "}
+                    >
+
+                        <View style={styles.markerStyles}/>
+
+
+                    </MapView.Marker>
+
+
+                    <MapView.Marker
+                        coordinate={this.state.longPressMarkerCoordinates}
+                        title={"destination"}
+                        description={"reach me if you can ... "}
+                        pinColor = {"darkgreen"}
                     />
 
-
+                    <MapViewDirections
+                        origin={this.state.trackMarkerPosition}
+                        destination={this.state.longPressMarkerCoordinates}
+                        apikey={GOOGLE_API_KEY}
+                        strokeWidth={5}
+                        strokeColor="hotpink"
+                        // language
+                        //alternatives = {true}
+                    />
 
                 </MapView>
                 {/*<Text>--------------------------</Text>*/}
@@ -144,6 +185,30 @@ class mapViewScreen extends React.Component{
 
 }
 
+const styles ={
+    radius:{
+        height: 50,
+        width: 50,
+        borderRadius: 50/2,
+        overflow: "hidden",
+        backgroundColor: "rgba(0,122,255,0.1)",
+        borderWidth: 1,
+        borderColor: "rgba(0,122,255,0.3)",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    markerStyles:{
+
+        height: 15,
+        width:15,
+        borderWidth: 3,
+        borderColor: "white",
+        borderRadius: 10,
+        overflow: "hidden",
+        backgroundColor: "#007AFF"
+    }
+
+};
 
 
 export default mapViewScreen;
