@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text, ToastAndroid } from "react-native";
+import { View, Text, ToastAndroid, Button } from "react-native";
 import firebase from 'firebase';
-import { MapView, Location, Permissions } from 'expo';
+import { MapView, Location, Permissions, Audio } from 'expo';
 import MapViewDirections from 'react-native-maps-directions';
 
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA =  0.0421;
-const GEOLOCATION_OPTIONS = { enableHighAccuracy: true, distanceInterval : 10 };
+const GEOLOCATION_OPTIONS = { enableHighAccuracy: true, distanceInterval : 15 };
 const GOOGLE_API_KEY = 'AIzaSyB13MpI1LMJD38RjFfdkoOyI25Rr2OyNV0';
 
 const firebaseConfig = {
@@ -38,7 +38,16 @@ class mapViewScreen extends React.Component{
             latitude: 0,
             longitude: 0,
         },
+        dangerMarkerCoords : [{
+
+            latitude : 0,
+            longitude : 0,
+            name : 'initial',
+
+        }],
         speed : 0,
+        updateDangerBool : false,
+
 
     };
 
@@ -107,9 +116,57 @@ class mapViewScreen extends React.Component{
         };
 
         this.setState({longPressMarkerCoordinates : longPress });
-
     }
 
+
+    async fillMarkerArray(data){
+
+        const dangerMarkers = [];
+        await data.on('value',(snapshot) => {
+            snapshot.forEach((child) =>{
+                // console.log(child.val().name);
+                // console.log(child.val().latitude);
+                // console.log(child.val().longitude);
+                dangerMarkers.push({name : child.val().name,
+                    latitude : child.val().latitude,
+                    longitude : child.val().longitude,
+                });
+
+                this.setState({dangerMarkerCoords : dangerMarkers});
+            });
+        });
+
+    };
+
+    updateDangerCoords(){
+
+      console.log("Button Pressed");
+      const data = firebase.database().ref("/danger_coords");
+            this.fillMarkerArray(data);
+            console.log(this.state.dangerMarkerCoords);
+            this.setState({updateDangerBool : true});
+          // if(this.state.dangerMarkerCoords[0] != null) {
+          //     console.log("not null");
+          //     console.log(this.state.dangerMarkerCoords);
+          //     this.setState({updateDangerBool: true});
+          // }
+
+    };
+
+
+    updateDangerCheck(){
+
+        if(this.state.updateDangerBool){
+
+            return(
+                this.state.dangerMarkerCoords.map(marker => (
+                    <MapView.Marker
+                        coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
+                        title={marker.name}
+                    />
+                ))
+        );
+    }}
 
     componentWillMount(){
 
@@ -160,6 +217,9 @@ class mapViewScreen extends React.Component{
                         pinColor = {"darkgreen"}
                     />
 
+                    {this.updateDangerCheck()}
+
+
                     <MapViewDirections
                         origin={this.state.trackMarkerPosition}
                         destination={this.state.longPressMarkerCoordinates}
@@ -177,6 +237,13 @@ class mapViewScreen extends React.Component{
                 <Text>Map Speed</Text>
                 <Text>{this.state.speed * 3.6} km/hr</Text>
                 <Text>--------------------------</Text>
+
+                <Button
+                    title = "get Danger Update"
+                    onPress = {() => this.updateDangerCoords()}
+
+                />
+
 
             </View>
         );

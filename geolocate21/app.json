@@ -9,13 +9,18 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.praats.geolocate21",
+      "icon": "./assets/icon.png",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyB13MpI1LMJD38RjFfdkoOyI25Rr2OyNV0"
+        }
+      }
     }
   }
 }
