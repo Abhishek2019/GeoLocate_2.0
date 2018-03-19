@@ -9,7 +9,7 @@ class Home extends React.Component{
             <View>
                 <Text>Main Page</Text>
                 <Button
-                    title="Go to Maps"
+                    title="Go to Maps Abhishek"
                     onPress={() => this.props.navigation.navigate('maps')}
                 />
             </View>

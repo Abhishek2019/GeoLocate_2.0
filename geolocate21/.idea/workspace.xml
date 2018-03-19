@@ -29,8 +29,8 @@
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screens/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="533">
+              <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -41,8 +41,8 @@
       <file leaf-file-name="mapViewScreen.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/screens/mapViewScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="77" lean-forward="false" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+            <state relative-caret-position="25">
+              <caret line="313" column="0" lean-forward="true" selection-start-line="313" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -57,8 +57,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/screens/mapView_screen.js" />
         <option value="$PROJECT_DIR$/App.js" />
-        <option value="$PROJECT_DIR$/src/screens/Home.js" />
         <option value="$PROJECT_DIR$/app.json" />
+        <option value="$PROJECT_DIR$/src/screens/Home.js" />
         <option value="$PROJECT_DIR$/src/screens/mapViewScreen.js" />
       </list>
     </option>
@@ -129,12 +129,13 @@
       <workItem from="1521228151232" duration="2214000" />
       <workItem from="1521254461250" duration="10082000" />
       <workItem from="1521298888917" duration="8224000" />
-      <workItem from="1521373034020" duration="12850000" />
+      <workItem from="1521373034020" duration="14937000" />
+      <workItem from="1521432348592" duration="2719000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37076000" />
+    <option name="totallyTimeSpent" value="41882000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -172,6 +173,26 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screens/mapViewScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7875">
+          <caret line="315" column="18" lean-forward="false" selection-start-line="315" selection-start-column="18" selection-end-line="315" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
@@ -241,8 +262,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/screens/Home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="533">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -251,8 +272,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/screens/mapViewScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="77" lean-forward="false" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+        <state relative-caret-position="25">
+          <caret line="313" column="0" lean-forward="true" selection-start-line="313" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

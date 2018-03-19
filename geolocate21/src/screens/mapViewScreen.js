@@ -1,11 +1,16 @@
 import React from "react";
-import { View, Text, ToastAndroid, Button } from "react-native";
+import { View, Text, ToastAndroid, Button, Dimensions } from "react-native";
 import firebase from 'firebase';
-import { MapView, Location, Permissions, Audio } from 'expo';
+import { MapView, Location } from 'expo';
 import MapViewDirections from 'react-native-maps-directions';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
+
+const {width,height} = Dimensions.get("window");
+const ASPECT_RATIO = width/height;
 const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA =  0.0421;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 const GEOLOCATION_OPTIONS = { enableHighAccuracy: true, distanceInterval : 15 };
 const GOOGLE_API_KEY = 'AIzaSyB13MpI1LMJD38RjFfdkoOyI25Rr2OyNV0';
 
@@ -163,7 +168,9 @@ class mapViewScreen extends React.Component{
                     <MapView.Marker
                         coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
                         title={marker.name}
-                    />
+                    >
+                        <View  style = {styles.dangerMarkerStyles} />
+                    </MapView.Marker>
                 ))
         );
     }}
@@ -187,6 +194,48 @@ class mapViewScreen extends React.Component{
 
         return(
             <View style={{flex:1}}>
+                <GooglePlacesAutocomplete
+                    placeholder='Enter Location'
+                    minLength={2}
+                    autoFocus={true}
+                    returnKeyType={'default'}
+                    fetchDetails={true}
+
+                    onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+                        console.log(details);
+                        alert("Latitude :"+details.geometry.location.lat+"\nLongitude : "+details.geometry.location.lng);
+
+                    }}
+
+                    query={{
+                        // available options: https://developers.google.com/places/web-service/autocomplete
+                        key: GOOGLE_API_KEY,
+                        language: 'en', // language of the results
+                        // types: '(cities)' // default: 'geocode'
+                    }}
+
+                    styles={{
+                        textInputContainer: {
+                            backgroundColor: 'rgba(0, 0, 0, 0)',
+                            borderTopWidth: 0,
+                            borderBottomWidth:0,
+                            marginTop: 45,
+                        },
+                        textInput: {
+                            marginLeft: 0,
+                            marginRight: 0,
+                            height: 38,
+                            color: '#5d5d5d',
+                            fontSize: 16
+                        },
+                        predefinedPlacesDescription: {
+                            color: '#1faadb'
+                        },
+                    }}
+                    currentLocation={false}
+                />
+
+
                 <MapView
 
                     style={{ flex: 1 }}
@@ -231,18 +280,18 @@ class mapViewScreen extends React.Component{
                     />
 
                 </MapView>
-                {/*<Text>--------------------------</Text>*/}
-                {/*<Text>{this.state.location.timeStamp}</Text>*/}
+
+
                 <Text>--------------------------</Text>
                 <Text>Map Speed</Text>
                 <Text>{this.state.speed * 3.6} km/hr</Text>
-                <Text>--------------------------</Text>
+                <Text>---------------------------</Text>
 
                 <Button
                     title = "get Danger Update"
                     onPress = {() => this.updateDangerCoords()}
-
                 />
+                <Text>-----------------------------</Text>
 
 
             </View>
@@ -266,14 +315,27 @@ const styles ={
     },
     markerStyles:{
 
-        height: 15,
-        width:15,
-        borderWidth: 3,
+        height: 12,
+        width:12,
+        borderWidth: 0,
         borderColor: "white",
-        borderRadius: 10,
+        borderRadius: 9,
         overflow: "hidden",
         backgroundColor: "#007AFF"
+    },
+
+    dangerMarkerStyles:{
+
+        height: 10,
+        width:10,
+        borderWidth: 0,
+        borderColor: "white",
+        borderRadius: 8,
+        overflow: "hidden",
+        backgroundColor: "#FF0000"
     }
+
+
 
 };
 
